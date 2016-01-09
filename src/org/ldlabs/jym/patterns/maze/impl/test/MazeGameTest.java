@@ -1,7 +1,9 @@
-package org.ldlabs.jym.patterns.maze.impl;
+package org.ldlabs.jym.patterns.maze.impl.test;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.ldlabs.jym.patterns.maze.impl.Maze;
+import org.ldlabs.jym.patterns.maze.impl.MazeGame;
 
 /**
  * Test unit for MazeGame.
