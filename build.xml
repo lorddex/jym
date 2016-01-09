@@ -1,0 +1,92 @@
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="jym" default="test.unit">
+
+	<target name="init" description="init variables">
+		<property name="src.dir" value="src/"/>
+		<property name="build.dir" value="build"/>
+		<property name="lib.dir" value="lib/"/>
+		<property name="conf.dir" value="configuration"/>
+		<property name="ivy.dep.file" value="${conf.dir}/ivy.xml"/>
+		<property name="classes.build.dir" value="${build.dir}/classes"/>
+		<property name="test.classes.build.dir" value="${build.dir}/tests"/>
+		<property name="reports.build.dir" value="${build.dir}/reports"/>
+		<property name="test.reports.build.dir" value="${reports.build.dir}/test"/>
+	</target>
+
+	<target name="prepare" depends="init" description="create files and folders">
+		<mkdir dir="${build.dir}"/>
+		<mkdir dir="${classes.build.dir}"/>
+		<mkdir dir="${test.classes.build.dir}"/>
+		<mkdir dir="${reports.build.dir}"/>
+		<mkdir dir="${test.reports.build.dir}"/>
+	</target>
+
+	<target name="clean" depends="init" description="clean classes">
+		<delete includeemptydirs="true">
+			<fileset dir="${build.dir}"/>
+		</delete>
+	</target>
+
+	<target name="dep.clean" depends="init" description="clean libs">
+		<delete includeemptydirs="true" quiet="true">
+			<fileset dir="${lib.dir}"/>
+		</delete>
+	</target>
+
+	<target name="dep.resolve" depends="init" description="retrieve dependencies with ivy">
+		<ivy:resolve file="${ivy.dep.file}"/>
+	</target>
+
+	<target name="dep.update" depends="dep.resolve">
+		<ivy:retrieve pattern="lib/[conf]/[artifact]-[revision].[ext]" sync="true" conf="compile,test,runtime,test-compile,provided" />
+	</target>
+
+	<target name="dep.update.local" depends="">
+			<ivy:retrieve pattern="lib/[conf]/[artifact]-[revision].[ext]" sync="true" conf="compile,test,runtime,test-compile,provided" />
+	</target>
+	
+	<target name="compile" depends="compile.classes,compile.test">
+	</target>
+	
+	<target name="compile.classes" depends="dep.update,prepare" description="create class files">
+		<javac srcdir="${src.dir}" destdir="${classes.build.dir}" excludes="**/test/**" fork="true" source="1.7" target="1.7" includeantruntime="false">
+		</javac>
+		<path id="build.class.path"> 
+			<pathelement path="${classes.build.dir}"/>
+		</path>
+	</target>
+
+	<target name="compile.test" depends="compile.classes" description="create class files for tests">
+		<javac srcdir="${src.dir}" destdir="${test.classes.build.dir}" includes="**/test/**" fork="true" source="1.7" target="1.7" includeantruntime="false">
+			<classpath>
+				<fileset dir="${lib.dir}/test-compile/">
+					<include name="*.jar"/>
+				</fileset>
+			</classpath>
+		</javac>
+		<path id="test.build.class.path"> 
+			<pathelement path="${test.classes.build.dir}"/>
+		</path>
+	</target>
+	
+	<target name="test.unit" depends="compile" description="test units">
+		<junit printsummary="yes" haltonfailure="yes">
+		  <classpath>
+		  	<fileset dir="${lib.dir}/test/">
+				<include name="*.jar"/>
+			</fileset>
+		  	<pathelement path="${build.class.path}"/>
+		  	<pathelement path="${test.classes.build.dir}"/>
+		  </classpath>
+
+		  <test name="org.ldlabs.jym.maze.impl.test.MazeGameTest" haltonfailure="no" todir="${test.reports.build.dir}">
+		    <formatter type="xml"/>
+		  </test>
+
+		  <test name="org.ldlabs.jym.patterns.creational.abstractfactory.test.MazeFactoryTest" haltonfailure="no" todir="${test.reports.build.dir}">
+		    <formatter type="xml"/>
+		  </test>
+			
+		</junit>
+	</target>
+	
+</project>
