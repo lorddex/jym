@@ -1,6 +1,6 @@
-package org.ldlabs.jym.patterns.maze;
+package org.ldlabs.jym.maze;
 
-import org.ldlabs.jym.patterns.maze.shared.Direction;
+import org.ldlabs.jym.maze.shared.Direction;
 
 /**
  * A Room defined the key relationships between components in the maze. 

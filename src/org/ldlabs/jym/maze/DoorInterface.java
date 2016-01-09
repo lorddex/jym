@@ -1,6 +1,6 @@
-package org.ldlabs.jym.patterns.maze;
+package org.ldlabs.jym.maze;
 
-import org.ldlabs.jym.patterns.maze.shared.MazeException;
+import org.ldlabs.jym.maze.shared.MazeException;
 
 /**
  * A Door that interconnect two {@link RoomInterface}s.
@@ -20,4 +20,13 @@ public interface DoorInterface extends MapSiteInterface {
 	 */
 	public RoomInterface otherSideFrom(RoomInterface room) throws MazeException;
 	
+	/**
+	 * To open the door.
+	 */
+	public void openTheDoor();
+	
+	/**
+	 * To close the door.
+	 */
+	public void closeTheDoor();
 }

@@ -1,8 +1,9 @@
-package org.ldlabs.jym.patterns.maze.impl;
+package org.ldlabs.jym.maze.impl;
 
-import org.ldlabs.jym.patterns.maze.DoorInterface;
-import org.ldlabs.jym.patterns.maze.RoomInterface;
-import org.ldlabs.jym.patterns.maze.shared.MazeException;
+import org.ldlabs.jym.maze.DoorInterface;
+import org.ldlabs.jym.maze.MapSiteInterface;
+import org.ldlabs.jym.maze.RoomInterface;
+import org.ldlabs.jym.maze.shared.MazeException;
 
 /**
  * An implementation of the {@link DoorInterface} interface.
@@ -88,8 +89,31 @@ public class Door implements DoorInterface {
 	}
 
 	@Override
-	public void enter() {
-		// TODO Auto-generated method stub
+	public void enter(MapSiteInterface siteFrom) {
+		if (this.isOpen)
+		{
+			System.out.println("Entering the room.");
+			try {
+				this.otherSideFrom((RoomInterface)siteFrom).enter(siteFrom);
+			} catch (MazeException e) {
+				System.out.println("You fall into the darkness.");
+			}
+		}
+		else
+		{
+			System.out.println("The door is closed.");
+		}
+	}
+
+	@Override
+	public void openTheDoor() {
+		this.isOpen = Boolean.TRUE;
+		
+	}
+
+	@Override
+	public void closeTheDoor() {
+		this.isOpen = Boolean.FALSE;
 		
 	}
 

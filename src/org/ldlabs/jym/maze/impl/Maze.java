@@ -1,11 +1,11 @@
-package org.ldlabs.jym.patterns.maze.impl;
+package org.ldlabs.jym.maze.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ldlabs.jym.patterns.maze.MazeInterface;
-import org.ldlabs.jym.patterns.maze.RoomInterface;
-import org.ldlabs.jym.patterns.maze.shared.MazeException;
+import org.ldlabs.jym.maze.MazeInterface;
+import org.ldlabs.jym.maze.RoomInterface;
+import org.ldlabs.jym.maze.shared.MazeException;
 
 /**
  * An implementation of the {@link MazeInterface}.

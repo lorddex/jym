@@ -1,6 +1,6 @@
-package org.ldlabs.jym.patterns.maze.impl;
+package org.ldlabs.jym.maze.impl;
 
-import org.ldlabs.jym.patterns.maze.shared.Direction;
+import org.ldlabs.jym.maze.shared.Direction;
 
 /**
  * Creates a Maze.

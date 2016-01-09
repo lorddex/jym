@@ -1,11 +1,11 @@
-package org.ldlabs.jym.patterns.maze.impl;
+package org.ldlabs.jym.maze.impl;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.ldlabs.jym.patterns.maze.MapSiteInterface;
-import org.ldlabs.jym.patterns.maze.RoomInterface;
-import org.ldlabs.jym.patterns.maze.shared.Direction;
+import org.ldlabs.jym.maze.MapSiteInterface;
+import org.ldlabs.jym.maze.RoomInterface;
+import org.ldlabs.jym.maze.shared.Direction;
 
 /**
  * A Room defined the key relationships between components in the maze. 
@@ -72,8 +72,9 @@ public class Room implements RoomInterface {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void enter() {
-		// TODO Auto-generated method stub
+	public void enter(MapSiteInterface siteFrom) {
+		
+		System.out.println("Entering the room " + this.roomNumber);
 		
 	}
 

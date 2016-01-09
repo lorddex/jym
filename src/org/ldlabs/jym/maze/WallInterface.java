@@ -1,4 +1,4 @@
-package org.ldlabs.jym.patterns.maze;
+package org.ldlabs.jym.maze;
 
 /**
  * A wall.

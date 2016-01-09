@@ -1,4 +1,4 @@
-package org.ldlabs.jym.patterns.maze.shared;
+package org.ldlabs.jym.maze.shared;
 
 /**
  * The sides of a room.

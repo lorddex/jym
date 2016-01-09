@@ -1,6 +1,6 @@
-package org.ldlabs.jym.patterns.maze;
+package org.ldlabs.jym.maze;
 
-import org.ldlabs.jym.patterns.maze.shared.MazeException;
+import org.ldlabs.jym.maze.shared.MazeException;
 
 /**
  * This interface represent a collection of objects that implement {@link RoomInterface}.

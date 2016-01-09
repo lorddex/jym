@@ -1,4 +1,4 @@
-package org.ldlabs.jym.patterns.maze.shared;
+package org.ldlabs.jym.maze.shared;
 
 /**
  * Exception thrown if an error occurs during the Maze exploration.
