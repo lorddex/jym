@@ -4,12 +4,12 @@ import org.ldlabs.jym.maze.impl.Maze;
 import org.ldlabs.jym.maze.shared.MazeException;
 
 /**
- * Package protected implementation of the AbstractFactory pattern for the Maze.
+ * Implementation of the AbstractFactory pattern for the Maze.
  * 
  * @author Francesco Apollonio
  *
  */
-abstract class MazeFactory {
+public abstract class MazeFactory {
 	
 	/**
 	 * Creates a new Maze selecting the type using the {@code type} parameter.
@@ -17,7 +17,7 @@ abstract class MazeFactory {
 	 * @return The created Maze.
 	 * 
 	 */
-	abstract Maze createMaze();
+	public abstract Maze createMaze();
 	
 	/**
 	 * Creates a new MazeFactory of the type specified with the parameter {@code type}.

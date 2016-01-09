@@ -18,7 +18,7 @@ class MagicMazeFactory extends MazeFactory {
 	 * {@inheritDoc}
 	 */
 	@Override
-	Maze createMaze() {
+	public Maze createMaze() {
 		Maze maze = new Maze();
 		
 		Room room1 = new Room(1);

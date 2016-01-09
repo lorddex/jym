@@ -1,4 +1,4 @@
-package org.ldlabs.jym.patterns.creational.abstractfactory;
+package org.ldlabs.jym.patterns.creational.abstractfactory.test;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -7,6 +7,8 @@ import org.ldlabs.jym.maze.impl.DoorNeedingWord;
 import org.ldlabs.jym.maze.impl.Maze;
 import org.ldlabs.jym.maze.shared.Direction;
 import org.ldlabs.jym.maze.shared.MazeException;
+import org.ldlabs.jym.patterns.creational.abstractfactory.MazeFactory;
+import org.ldlabs.jym.patterns.creational.abstractfactory.MazeType;
 
 /**
  * JUnit to test the MazeFactory.
