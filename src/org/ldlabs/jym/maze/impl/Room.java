@@ -51,19 +51,18 @@ public class Room implements RoomInterface {
 	/**
 	 * {@inheritDoc}
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends MapSiteInterface> T getSide(Direction direction) {
+	public MapSiteInterface getSide(Direction direction) {
 		
-		return (T) sides.get(direction);
+		return sides.get(direction);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public <T extends MapSiteInterface> void setSide(Direction direction,
-			T mapSite) {
+	public void setSide(Direction direction,
+			MapSiteInterface mapSite) {
 		
 		sides.put(direction, mapSite);
 		
