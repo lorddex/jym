@@ -10,6 +10,8 @@
 		<property name="test.classes.build.dir" value="${build.dir}/tests"/>
 		<property name="reports.build.dir" value="${build.dir}/reports"/>
 		<property name="test.reports.build.dir" value="${reports.build.dir}/test"/>
+		<property name="docs.build.dir" value="${build.dir}/docs"/>
+		<property name="api.docs.build.dir" value="${docs.build.dir}/api"/>
 	</target>
 
 	<target name="prepare" depends="init" description="create files and folders">
@@ -18,6 +20,8 @@
 		<mkdir dir="${test.classes.build.dir}"/>
 		<mkdir dir="${reports.build.dir}"/>
 		<mkdir dir="${test.reports.build.dir}"/>
+		<mkdir dir="${docs.build.dir}"/>
+		<mkdir dir="${api.docs.build.dir}"/>
 	</target>
 
 	<target name="clean" depends="init" description="clean classes">
@@ -89,4 +93,10 @@
 		</junit>
 	</target>
 	
+	<target name="javadoc" depends="prepare">
+		<javadoc destdir="${api.docs.build.dir}" author="true" version="true" use="true">
+		    <fileset dir="${src.dir}" excludes="**/test/**">
+		    </fileset>
+		</javadoc>
+	</target>
 </project>
