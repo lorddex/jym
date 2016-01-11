@@ -19,7 +19,7 @@ import org.ldlabs.jym.patterns.creational.abstractfactory.MazeType;
 public class MazeFactoryTest {
 
 	/**
-	 * 
+	 * Test creation of two different {@link Maze} type, using a factory.
 	 */
 	@Test
 	public void test() {
