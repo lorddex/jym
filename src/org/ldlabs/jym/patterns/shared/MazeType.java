@@ -1,4 +1,4 @@
-package org.ldlabs.jym.patterns.creational.abstractfactory;
+package org.ldlabs.jym.patterns.shared;
 
 
 /**

@@ -2,6 +2,7 @@ package org.ldlabs.jym.patterns.creational.abstractfactory;
 
 import org.ldlabs.jym.maze.impl.Maze;
 import org.ldlabs.jym.maze.shared.MazeException;
+import org.ldlabs.jym.patterns.shared.MazeType;
 
 /**
  * Implementation of the AbstractFactory pattern for the Maze.
@@ -28,7 +29,7 @@ public abstract class MazeFactory {
 	 * 
 	 * @throws MazeException If the type is not valid.
 	 */
-	public static MazeFactory createMaze(MazeType type) throws MazeException {
+	public static MazeFactory getMazeFactory(MazeType type) throws MazeException {
 		
 		if (type.equals(MazeType.WITH_MAGIC_DOOR))
 		{
