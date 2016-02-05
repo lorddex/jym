@@ -51,7 +51,7 @@
 	<target name="compile" depends="compile.classes,compile.test">
 	</target>
 	
-	<target name="compile.classes" depends="dep.update,prepare" description="create class files">
+	<target name="compile.classes" depends="prepare" description="create class files">
 		<javac srcdir="${src.dir}" destdir="${classes.build.dir}" excludes="**/test/**" fork="true" source="1.7" target="1.7" includeantruntime="false">
 		</javac>
 		<path id="build.class.path"> 
