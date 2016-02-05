@@ -59,7 +59,7 @@
 		</path>
 	</target>
 
-	<target name="compile.test" depends="compile.classes" description="create class files for tests">
+	<target name="compile.test" depends="compile.classes,dep.update" description="create class files for tests">
 		<javac srcdir="${src.dir}" destdir="${test.classes.build.dir}" includes="**/test/**" fork="true" source="1.7" target="1.7" includeantruntime="false">
 			<classpath>
 				<fileset dir="${lib.dir}/test-compile/">
