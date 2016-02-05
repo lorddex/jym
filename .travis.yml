@@ -1,3 +1,5 @@
-before_install: ant test.unit
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y ivy
 install: true
-script: bundle exec rake --verbose --trace
+script: ant test.unit
