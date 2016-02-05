@@ -1,1 +1,2 @@
-install: ant test.unit
+before_install: ant test.unit
+install: true
