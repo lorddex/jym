@@ -1,2 +1,3 @@
 before_install: ant test.unit
 install: true
+script: bundle exec rake --verbose --trace
