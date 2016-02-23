@@ -1,8 +1,31 @@
 <project xmlns:ivy="antlib:org.apache.ivy.ant" name="jym" default="test.unit">
 
 	<target name="init" description="init variables">
+		<property name="project.name" value="${ant.project.name}" />
+		<property name="project.version" value="0.1" />
+		
+		<!-- calculating timestamp -->
+		<tstamp>
+	      <format property="timestamp" pattern="yyyy-MM-dd.hh:mm:ssaa"
+	          unit="hour"/>
+	    </tstamp>
+		
+		<!-- calculating commit revision (GIT)-->
+		<exec executable="/usr/bin/git" failifexecutionfails="no" outputproperty="git.revision.no">
+        	<arg value="log" />
+    	    <arg value="-1" />
+    	    <arg value="--pretty=format:%h" />
+        </exec>
+		
+		<!-- calculating commit revision (SVN)-->
+        <exec executable="/usr/local/bin/svnversion" failifexecutionfails="no" outputproperty="svn.revision.no">
+            <arg value="-n"/>
+            <arg value="."/>
+        </exec>
+		
 		<property name="src.dir" value="src/"/>
 		<property name="build.dir" value="build"/>
+		<property name="jar.build.dir" value="build/jar"/>
 		<property name="lib.dir" value="lib/"/>
 		<property name="conf.dir" value="configuration"/>
 		<property name="ivy.dep.file" value="${conf.dir}/ivy.xml"/>
@@ -16,6 +39,7 @@
 
 	<target name="prepare" depends="init" description="create files and folders">
 		<mkdir dir="${build.dir}"/>
+		<mkdir dir="${jar.build.dir}"/>
 		<mkdir dir="${classes.build.dir}"/>
 		<mkdir dir="${test.classes.build.dir}"/>
 		<mkdir dir="${reports.build.dir}"/>
@@ -105,6 +129,16 @@
 	</target>
 	
 	<target name="all" depends="test.unit,documentation">
+	</target>
+
+	<target name="jar" depends="compile">
+		<jar basedir="${classes.build.dir}" destfile="${build.dir}/jar/${project.name}-${project.version}.jar">
+			<manifest>
+				<attribute name="Built-Date" value="${timestamp}" />
+				<attribute name="Implementation-Version" value="${project.version}-r${git.revision.no}" />
+				<attribute name="Implementation-Title" value="${project.name}" />
+			</manifest>
+		</jar>
 	</target>
 	
 </project>
