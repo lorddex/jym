@@ -7,6 +7,7 @@ import org.ldlabs.jym.maze.impl.DoorNeedingWord;
 import org.ldlabs.jym.maze.impl.Maze;
 import org.ldlabs.jym.maze.shared.Direction;
 import org.ldlabs.jym.maze.shared.MazeException;
+import org.ldlabs.jym.patterns.creational.abstractfactory.MazeFactoryInterface;
 import org.ldlabs.jym.patterns.creational.singleton.MazeSingletonFactory;
 import org.ldlabs.jym.patterns.shared.MazeType;
 
@@ -25,8 +26,8 @@ public class MazeSingletonTest {
 	public void test() {
 		
 		Maze maze = null;
-		MazeSingletonFactory mazeFactory = null;
-		MazeSingletonFactory mazeFactory2 = null;
+		MazeFactoryInterface mazeFactory = null;
+		MazeFactoryInterface mazeFactory2 = null;
 		
 		try {
 			mazeFactory = MazeSingletonFactory.getMazeFactory(MazeType.WITH_MAGIC_DOOR);

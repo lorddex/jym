@@ -4,6 +4,23 @@
 		<property name="project.name" value="${ant.project.name}" />
 		<property name="project.version" value="0.1" />
 		
+		<property name="src.dir" value="src/"/>
+		<property name="build.dir" value="build"/>
+		<property name="jar.build.dir" value="build/jar"/>
+		<property name="lib.dir" value="lib/"/>
+		<property name="conf.dir" value="configuration"/>
+		<property name="ivy.dep.file" value="${conf.dir}/ivy.xml"/>
+		<property name="classes.build.dir" value="${build.dir}/classes"/>
+		<property name="test.classes.build.dir" value="${build.dir}/tests"/>
+		<property name="reports.build.dir" value="${build.dir}/reports"/>
+		<property name="test.reports.build.dir" value="${reports.build.dir}/test"/>
+		<property name="docs.build.dir" value="${build.dir}/docs"/>
+		<property name="api.docs.build.dir" value="${docs.build.dir}/api"/>
+		<property name="config.dir" value="configuration/"/>
+		
+		<!-- calculating build number -->
+		<buildnumber file="${conf.dir}/build.num"/>
+		
 		<!-- calculating timestamp -->
 		<tstamp>
 	      <format property="timestamp" pattern="yyyy-MM-dd.hh:mm:ssaa"
@@ -22,19 +39,6 @@
             <arg value="-n"/>
             <arg value="."/>
         </exec>
-		
-		<property name="src.dir" value="src/"/>
-		<property name="build.dir" value="build"/>
-		<property name="jar.build.dir" value="build/jar"/>
-		<property name="lib.dir" value="lib/"/>
-		<property name="conf.dir" value="configuration"/>
-		<property name="ivy.dep.file" value="${conf.dir}/ivy.xml"/>
-		<property name="classes.build.dir" value="${build.dir}/classes"/>
-		<property name="test.classes.build.dir" value="${build.dir}/tests"/>
-		<property name="reports.build.dir" value="${build.dir}/reports"/>
-		<property name="test.reports.build.dir" value="${reports.build.dir}/test"/>
-		<property name="docs.build.dir" value="${build.dir}/docs"/>
-		<property name="api.docs.build.dir" value="${docs.build.dir}/api"/>
 	</target>
 
 	<target name="prepare" depends="init" description="create files and folders">
@@ -48,7 +52,7 @@
 		<mkdir dir="${api.docs.build.dir}"/>
 	</target>
 
-	<target name="clean" depends="init" description="clean classes">
+	<target name="clean" depends="prepare" description="clean classes">
 		<delete includeemptydirs="true">
 			<fileset dir="${build.dir}"/>
 		</delete>
@@ -77,6 +81,11 @@
 	
 	<target name="compile.classes" depends="prepare" description="create class files">
 		<javac srcdir="${src.dir}" destdir="${classes.build.dir}" excludes="**/test/**" fork="true" source="1.7" target="1.7" includeantruntime="false">
+			<classpath>
+				<fileset dir="${lib.dir}/compile/">
+					<include name="*.jar"/>
+				</fileset>
+			</classpath>
 		</javac>
 		<path id="build.class.path"> 
 			<pathelement path="${classes.build.dir}"/>
@@ -98,25 +107,35 @@
 	
 	<target name="test.unit" depends="compile" description="test units">
 		<junit printsummary="yes" haltonfailure="yes">
-		  <classpath>
-		  	<fileset dir="${lib.dir}/test/">
+		<classpath>
+			<fileset dir="${lib.dir}/test/">
 				<include name="*.jar"/>
 			</fileset>
-		  	<pathelement path="${build.class.path}"/>
-		  	<pathelement path="${test.classes.build.dir}"/>
-		  </classpath>
+			<pathelement path="${build.class.path}"/>
+			<pathelement path="${test.classes.build.dir}"/>
+			<pathelement path="${config.dir}/i18n" />
+			<pathelement path="${config.dir}/preferences/test" />
+		</classpath>
 
-		  <test name="org.ldlabs.jym.maze.impl.test.MazeGameTest" haltonfailure="no" todir="${test.reports.build.dir}">
-		    <formatter type="xml"/>
-		  </test>
+        <test name="org.ldlabs.jym.maze.impl.test.MazeGameTest" haltonfailure="no" todir="${test.reports.build.dir}">
+			<formatter type="xml"/>
+		</test>
 
-		  <test name="org.ldlabs.jym.patterns.creational.abstractfactory.test.MazeFactoryTest" haltonfailure="no" todir="${test.reports.build.dir}">
-		    <formatter type="xml"/>
-		  </test>
+		<test name="org.ldlabs.jym.patterns.creational.abstractfactory.test.MazeFactoryTest" haltonfailure="no" todir="${test.reports.build.dir}">
+			<formatter type="xml"/>
+		</test>
 			
-		  <test name="org.ldlabs.jym.patterns.creational.singleton.test.MazeSingletonTest" haltonfailure="no" todir="${test.reports.build.dir}">
-		  	<formatter type="xml"/>
-		  </test>	
+		<test name="org.ldlabs.jym.patterns.creational.singleton.test.MazeSingletonTest" haltonfailure="no" todir="${test.reports.build.dir}">
+			<formatter type="xml"/>
+		</test>	
+			
+		<test name="org.ldlabs.commons.impl.test.ConfigurationTest" haltonfailure="no" todir="${test.reports.build.dir}">
+			<formatter type="xml"/>
+		</test>
+	
+		<test name="org.ldlabs.commons.impl.test.I18NTest" haltonfailure="no" todir="${test.reports.build.dir}">
+			<formatter type="xml"/>
+		</test>	
 			
 		</junit>
 	</target>
@@ -135,7 +154,14 @@
 		<jar basedir="${classes.build.dir}" destfile="${build.dir}/jar/${project.name}-${project.version}.jar">
 			<manifest>
 				<attribute name="Built-Date" value="${timestamp}" />
-				<attribute name="Implementation-Version" value="${project.version}-r${git.revision.no}" />
+				<attribute name="Implementation-Version" value="${project.version}-r${git.revision.no}-b${build.number}" />
+				<attribute name="Implementation-Title" value="${project.name}" />
+			</manifest>
+		</jar>
+		<jar basedir="${config.dir}" destfile="${build.dir}/jar/${project.name}-config-test-${project.version}.jar">
+			<manifest>
+				<attribute name="Built-Date" value="${timestamp}" />
+				<attribute name="Implementation-Version" value="${project.version}-r${git.revision.no}-b${build.number}" />
 				<attribute name="Implementation-Title" value="${project.name}" />
 			</manifest>
 		</jar>

@@ -23,4 +23,26 @@ public class MazeGameTest {
 		Assert.assertNotNull(maze);
 	}
 
+	/**
+	 * Test for references.
+	 */
+	@Test
+	public void referencesTest()
+	{
+		Long a = new Long(1L);
+		Assert.assertEquals((Long)1L, a);
+		
+		Long b = change(a);
+		Assert.assertEquals((Long)1L, a);
+		Assert.assertEquals((Long)2L, b);
+		
+	}
+	
+	private Long change(Long val)
+	{
+		val = new Long(2L);
+		
+		return val;
+	}
+	
 }

@@ -2,6 +2,7 @@ package org.ldlabs.jym.patterns.creational.singleton;
 
 import org.ldlabs.jym.maze.impl.Maze;
 import org.ldlabs.jym.maze.shared.MazeException;
+import org.ldlabs.jym.patterns.creational.abstractfactory.MazeFactoryInterface;
 import org.ldlabs.jym.patterns.shared.MazeType;
 
 /**
@@ -46,7 +47,7 @@ public abstract class MazeSingletonFactory {
 	 * 
 	 * @throws MazeException If the type is not valid.
 	 */
-	public static MazeSingletonFactory getMazeFactory(MazeType type) throws MazeException {
+	public static MazeFactoryInterface getMazeFactory(MazeType type) throws MazeException {
 		
 		if (type.equals(MazeType.WITH_MAGIC_DOOR))
 		{

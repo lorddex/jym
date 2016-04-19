@@ -5,6 +5,7 @@ import org.ldlabs.jym.maze.impl.Maze;
 import org.ldlabs.jym.maze.impl.Room;
 import org.ldlabs.jym.maze.impl.Wall;
 import org.ldlabs.jym.maze.shared.Direction;
+import org.ldlabs.jym.patterns.creational.abstractfactory.MazeFactoryInterface;
 
 /**
  * Package protected Magic maze factory.
@@ -12,12 +13,12 @@ import org.ldlabs.jym.maze.shared.Direction;
  * @author Francesco Apollonio
  *
  */
-class MagicMazeSingletonFactory extends MazeSingletonFactory {
+class MagicMazeSingletonFactory implements MazeFactoryInterface {
 
 	/**
-	 * Protected constructor.
+	 * A package protected constructor.
 	 */
-	protected MagicMazeSingletonFactory()
+	MagicMazeSingletonFactory()
 	{
 		super();
 	}

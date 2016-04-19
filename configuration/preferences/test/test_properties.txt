@@ -1,0 +1,2 @@
+test.preference.number = 1
+test.preference.string = ABC

@@ -12,8 +12,16 @@ import org.ldlabs.jym.maze.shared.Direction;
  * @author Francesco Apollonio
  *
  */
-class NormalMazeFactory extends MazeFactory {
+class NormalMazeFactory implements MazeFactoryInterface {
 
+	/**
+	 * Package protected constructor.
+	 */
+	NormalMazeFactory()
+	{
+		super();
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */

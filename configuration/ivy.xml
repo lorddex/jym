@@ -23,6 +23,10 @@
 
 		<!-- TEST -->
 		<dependency org="junit" name="junit" rev="4.12" conf="test->default;test-compile->master" />
+
+		<!-- commons configuration -->
+		<dependency org="org.apache.commons" name="commons-configuration2" rev="2.0" conf="compile->master;runtime->default" />
+		<dependency org="commons-beanutils" name="commons-beanutils" rev="1.9.2"  conf="runtime->default"/>
 		
 	</dependencies>
 </ivy-module>
