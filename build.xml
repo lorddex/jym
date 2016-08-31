@@ -35,7 +35,7 @@
         </exec>
 		
 		<!-- calculating commit revision (SVN)-->
-        <exec executable="/usr/local/bin/svnversion" failifexecutionfails="no" outputproperty="svn.revision.no">
+        <exec executable="/usr/bin/svnversion" failifexecutionfails="no" outputproperty="svn.revision.no">
             <arg value="-n"/>
             <arg value="."/>
         </exec>
@@ -106,7 +106,7 @@
 	</target>
 	
 	<target name="test.unit" depends="compile" description="test units">
-		<junit printsummary="yes" haltonfailure="yes">
+		<junit printsummary="yes" haltonerror="yes">
 		<classpath>
 			<fileset dir="${lib.dir}/test/">
 				<include name="*.jar"/>
@@ -151,13 +151,26 @@
 	</target>
 
 	<target name="jar" depends="compile">
-		<jar basedir="${classes.build.dir}" destfile="${build.dir}/jar/${project.name}-${project.version}.jar">
+		
+		<!-- jym files -->
+		<jar basedir="${classes.build.dir}/" destfile="${build.dir}/jar/${project.name}-jym-${project.version}.jar" includes="**/jym/**">
 			<manifest>
 				<attribute name="Built-Date" value="${timestamp}" />
 				<attribute name="Implementation-Version" value="${project.version}-r${git.revision.no}-b${build.number}" />
 				<attribute name="Implementation-Title" value="${project.name}" />
 			</manifest>
 		</jar>
+		
+		<!-- commons files -->
+		<jar basedir="${classes.build.dir}/" destfile="${build.dir}/jar/${project.name}-commons-${project.version}.jar" includes="**/commons/**">
+			<manifest>
+				<attribute name="Built-Date" value="${timestamp}" />
+				<attribute name="Implementation-Version" value="${project.version}-r${git.revision.no}-b${build.number}" />
+				<attribute name="Implementation-Title" value="${project.name}" />
+			</manifest>
+		</jar>
+		
+		<!-- jym test files -->
 		<jar basedir="${config.dir}" destfile="${build.dir}/jar/${project.name}-config-test-${project.version}.jar">
 			<manifest>
 				<attribute name="Built-Date" value="${timestamp}" />
@@ -165,6 +178,7 @@
 				<attribute name="Implementation-Title" value="${project.name}" />
 			</manifest>
 		</jar>
+		
 	</target>
 	
 </project>

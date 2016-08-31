@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
 public class I18N {
 
 	/**
-	 * TODO
+	 * This is the identifier that could be used into a string to indicate where a parameter must be used.
 	 */
 	private static final String PARAM_IDENTIFIER = "%s";
 
@@ -21,11 +21,6 @@ public class I18N {
 	 * TODO
 	 */
 	private static String RESOURCE_BUNDLE_NAME = "jsync";
-	
-	/**
-	 * TODO
-	 */
-	private static ResourceBundle resource = null;
 	
 	/**
 	 * Gets the internationalized string searching it with its 
@@ -38,10 +33,10 @@ public class I18N {
 	 */
 	public static String getString(String name, Object... params) {
 		
-		if (resource == null)
-		{
-			resource = ResourceBundle.getBundle(RESOURCE_BUNDLE_NAME, Locale.getDefault(), I18N.class.getClassLoader());
-		}
+//		if (resource == null)
+//		{
+		ResourceBundle resource = ResourceBundle.getBundle(RESOURCE_BUNDLE_NAME, Locale.getDefault(), I18N.class.getClassLoader());
+//		}
 		
 		String string = resource.getString(name);
 		
